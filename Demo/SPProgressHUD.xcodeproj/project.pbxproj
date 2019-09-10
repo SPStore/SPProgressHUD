@@ -17,7 +17,6 @@
 		52C4524F230F8AA900A3A77E /* SPProgressHUDUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 52C4524E230F8AA900A3A77E /* SPProgressHUDUITests.m */; };
 		52C4525E230F8AD500A3A77E /* SPProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = 52C4525D230F8AD500A3A77E /* SPProgressHUD.m */; };
 		52E863D9231E4E1B006FCFC2 /* SPIndefiniteAnimatedView.m in Sources */ = {isa = PBXBuildFile; fileRef = 5287D5982314E63D002708FB /* SPIndefiniteAnimatedView.m */; };
-		52E8AD58231CF3F500027D18 /* MBProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = 52E8AD56231CF3F500027D18 /* MBProgressHUD.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -58,8 +57,6 @@
 		52C45250230F8AA900A3A77E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		52C4525C230F8AD500A3A77E /* SPProgressHUD.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SPProgressHUD.h; sourceTree = "<group>"; };
 		52C4525D230F8AD500A3A77E /* SPProgressHUD.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SPProgressHUD.m; sourceTree = "<group>"; };
-		52E8AD56231CF3F500027D18 /* MBProgressHUD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MBProgressHUD.m; sourceTree = "<group>"; };
-		52E8AD57231CF3F500027D18 /* MBProgressHUD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MBProgressHUD.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -122,8 +119,6 @@
 				5287D5932314DA81002708FB /* SPProgressHUD */,
 				52C4522A230F8AA700A3A77E /* AppDelegate.h */,
 				52C4522B230F8AA700A3A77E /* AppDelegate.m */,
-				52E8AD57231CF3F500027D18 /* MBProgressHUD.h */,
-				52E8AD56231CF3F500027D18 /* MBProgressHUD.m */,
 				521F947B2313E640007CE804 /* SPTableViewController.h */,
 				521F947C2313E640007CE804 /* SPTableViewController.m */,
 				52E863D8231E4DD0006FCFC2 /* CustomViews */,
@@ -298,7 +293,6 @@
 				521F947D2313E640007CE804 /* SPTableViewController.m in Sources */,
 				52C4522C230F8AA700A3A77E /* AppDelegate.m in Sources */,
 				52C4525E230F8AD500A3A77E /* SPProgressHUD.m in Sources */,
-				52E8AD58231CF3F500027D18 /* MBProgressHUD.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

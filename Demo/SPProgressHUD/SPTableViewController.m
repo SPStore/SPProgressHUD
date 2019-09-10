@@ -9,7 +9,6 @@
 #import "SPTableViewController.h"
 #import "SPProgressHUD.h"
 #import "SPIndefiniteAnimatedView.h"
-#import "MBProgressHUD.h"
 
 @interface SPExample : NSObject
 
@@ -66,8 +65,8 @@ static NSString * SPExampleCellID     = @"SPExampleCellID";
 
 // 显示指示器
 - (void)activityExample {
-    [SPProgressHUD showActivity];
     // 模拟网络请求
+    [SPProgressHUD showActivity];
     dispatch_async(dispatch_get_global_queue(QOS_CLASS_USER_INITIATED, 0), ^{
         sleep(1.2);
         dispatch_async(dispatch_get_main_queue(), ^{
@@ -78,17 +77,15 @@ static NSString * SPExampleCellID     = @"SPExampleCellID";
 
 // 显示指示器+文本
 - (void)activityWithLabelExample {
-//    dispatch_queue_t que = dispatch_queue_create("aaa", DISPATCH_QUEUE_CONCURRENT);
-//    dispatch_async(que, ^{
-        [SPProgressHUD showActivityWithMessage:@"正在加载..." toView:self.view];
-        // 模拟网络请求
-        dispatch_async(dispatch_get_global_queue(QOS_CLASS_USER_INITIATED, 0), ^{
-            sleep(1.2);
-            dispatch_async(dispatch_get_main_queue(), ^{
-                [SPProgressHUD hide];
-            });
+    [SPProgressHUD showActivityWithMessage:@"正在加载..." toView:self.view];
+    __weak typeof(self) weakSelf = self;
+    // 模拟网络请求
+    dispatch_async(dispatch_get_global_queue(QOS_CLASS_USER_INITIATED, 0), ^{
+        sleep(1.2);
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [SPProgressHUD hideForView:weakSelf.view]; // 如果显示的时候指定了父视图，隐藏时也必须指定且跟显示时一致.
         });
-//    });
+    });
 }
 
 // 显示指示器+文本(文本在右)
@@ -113,7 +110,7 @@ static NSString * SPExampleCellID     = @"SPExampleCellID";
 
 // 显示纯文本
 - (void)labelExample {
-    SPProgressHUD *hud = [SPProgressHUD showWithMessage:[NSString stringWithFormat:@"登录成功\n经验值+2"] toView:nil];
+    SPProgressHUD *hud = [SPProgressHUD showWithMessage:@"登录成功\n经验值+2" toView:nil];
     hud.offset = CGPointMake(0, [UIScreen mainScreen].bounds.size.height * 3 / 8);
     hud.margin = 10;
     hud.minSize = CGSizeMake(150, 30);
@@ -146,11 +143,6 @@ static NSString * SPExampleCellID     = @"SPExampleCellID";
     SPProgressHUD *hud = [SPProgressHUD showWithImage:[image imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate] message:@"建议使用指纹支付"];
     hud.spacing = 10;
     [SPProgressHUD hideAfterDelay:2.0];
-    
-    // 方式二:(选取任意一种类方法显示，然后用customView取代内部指示器view或者UIImageView)
-//    SPProgressHUD *hud = [SPProgressHUD showInfoWithMessage:@"这是一块吐司"];
-//    hud.customView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"toast"]];
-//    [SPProgressHUD hideAfterDelay:1.2];
 }
 
 // 显示环状进度条(默认)
@@ -241,6 +233,7 @@ static NSString * SPExampleCellID     = @"SPExampleCellID";
     });
 }
 
+// 自定义一张图片
 - (void)customizeImageExample {
     UIImageView *imageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"toast"]];
     

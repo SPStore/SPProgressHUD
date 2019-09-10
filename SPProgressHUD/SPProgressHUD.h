@@ -52,7 +52,7 @@ typedef void(^SPProgressHUDHideCompletion)(void);
 + (instancetype)showInfoWithMessage:(nullable NSString *)message;
 + (instancetype)showInfoWithMessage:(nullable NSString *)message toView:(nullable UIView *)view;
 
-// 显示图片+文本
+// 显示自定义图片+文本
 + (instancetype)showWithImage:(UIImage *)image message:(NSString *)message;
 + (instancetype)showWithImage:(UIImage *)image
                       message:(NSString *)message
