@@ -2,7 +2,8 @@
 //  SPIndefiniteAnimatedView.h
 //  SPIndefiniteAnimatedView
 //
-//  Copyright (c) 2014-2019 Guillaume Campagna. All rights reserved.
+//  Created by 乐升平 on 2018/8/15.
+//  Copyright © 2018 乐升平. All rights reserved.
 //
 
 #import <UIKit/UIKit.h>

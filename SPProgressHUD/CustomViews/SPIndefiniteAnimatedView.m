@@ -1,9 +1,11 @@
-//
+
 //  SPIndefiniteAnimatedView.m
 //  SPIndefiniteAnimatedView
 //
-//  Copyright (c) 2014-2019 Guillaume Campagna. All rights reserved.
+//  Created by 乐升平 on 2018/8/15.
+//  Copyright © 2018 乐升平. All rights reserved.
 //
+
 
 #import "SPIndefiniteAnimatedView.h"
 
@@ -95,7 +97,13 @@
 }
 
 - (void)setFrame:(CGRect)frame {
-
+    CGFloat fitSize = (_radius+_strokeThickness/2+5)*2;
+    if (frame.size.width < fitSize) {
+        frame.size.width = fitSize;
+    }
+    if (frame.size.height < fitSize) {
+        frame.size.height = fitSize;
+    }
     if (!CGRectEqualToRect(frame, super.frame)) {
         [super setFrame:frame];
 
@@ -163,6 +171,7 @@
 }
 
 - (CGSize)sizeThatFits:(CGSize)size {
+    [self setFrame:CGRectMake(self.frame.origin.x, self.frame.origin.y, size.width, size.height)];
     return CGSizeMake((self.radius+self.strokeThickness/2+5)*2, (self.radius+self.strokeThickness/2+5)*2);
 }
 
