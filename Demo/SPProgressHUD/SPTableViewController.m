@@ -66,11 +66,11 @@ static NSString * SPExampleCellID     = @"SPExampleCellID";
 // 显示指示器
 - (void)activityExample {
     // 模拟网络请求
-    [SPProgressHUD showActivity];
+    [SPProgressHUD showActivityToView:SPProgressHUD.defaultWindow];
     dispatch_async(dispatch_get_global_queue(QOS_CLASS_USER_INITIATED, 0), ^{
         sleep(1.2);
         dispatch_async(dispatch_get_main_queue(), ^{
-            [SPProgressHUD hide];
+            [SPProgressHUD hideForView:SPProgressHUD.defaultWindow];
         });
     });
 }
@@ -90,7 +90,7 @@ static NSString * SPExampleCellID     = @"SPExampleCellID";
 
 // 显示指示器+文本(文本在右)
 - (void)activityWithRightLabelExample {
-    SPProgressHUD *hud = [SPProgressHUD showActivityWithMessage:@"正在加载..."];
+    SPProgressHUD *hud = [SPProgressHUD showActivityWithMessage:@"正在加载..." toView:SPProgressHUD.defaultWindow];
     hud.labelPosition = SPProgressHUDLabelPositionRight; // 文本的位置
     hud.minSize = CGSizeMake(180, 40); // 最小size
     hud.margin = 10; // 内容与四周的间距
@@ -103,36 +103,37 @@ static NSString * SPExampleCellID     = @"SPExampleCellID";
     dispatch_async(dispatch_get_global_queue(QOS_CLASS_USER_INITIATED, 0), ^{
         sleep(1.2);
         dispatch_async(dispatch_get_main_queue(), ^{
-            [SPProgressHUD hide];
+            [SPProgressHUD hideForView:SPProgressHUD.defaultWindow];
         });
     });
 }
 
 // 显示纯文本
 - (void)labelExample {
-    SPProgressHUD *hud = [SPProgressHUD showWithMessage:@"登录成功\n经验值+2" toView:nil];
-    hud.offset = CGPointMake(0, [UIScreen mainScreen].bounds.size.height * 3 / 8);
+    SPProgressHUD *hud = [SPProgressHUD showWithMessage:@"登录成功\n经验值+2"
+                                                 offset:CGPointMake(0, [UIScreen mainScreen].bounds.size.height * 3 / 8)
+                                                 toView:SPProgressHUD.defaultWindow];
     hud.margin = 10;
     hud.minSize = CGSizeMake(150, 30);
-    [SPProgressHUD hideAfterDelay:1.2];
+    [SPProgressHUD hideForView:SPProgressHUD.defaultWindow afterDelay:1.2f];
 }
 
 // 显示成功
 - (void)successsExample {
-    [SPProgressHUD showSuccessWithMessage:@"添加成功"];
-    [SPProgressHUD hideAfterDelay:1.2];
+    [SPProgressHUD showSuccessWithMessage:@"添加成功" toView:self.view];
+    [SPProgressHUD hideForView:self.view afterDelay:1.2f];
 }
 
 // 显示失败
 - (void)failureExample {
-    [SPProgressHUD showErrorWithMessage:@"添加失败"];
-    [SPProgressHUD hideAfterDelay:1.2];
+    [SPProgressHUD showErrorWithMessage:@"添加失败" toView:self.view];
+    [SPProgressHUD hideForView:self.view afterDelay:1.2f];
 }
 
 // 显示详情
 - (void)infoExample {
-    [SPProgressHUD showInfoWithMessage:@"详细信息"];
-    [SPProgressHUD hideAfterDelay:1.2];
+    [SPProgressHUD showInfoWithMessage:@"详细信息" toView:self.view];
+    [SPProgressHUD hideForView:self.view afterDelay:1.2f];
 }
 
 // 显示自定义图片+文本
@@ -140,21 +141,21 @@ static NSString * SPExampleCellID     = @"SPExampleCellID";
     // 方式一:
     UIImage *image = [UIImage imageNamed:@"fingerprint"];
     // 调用imageWithRenderingMode:,图片的颜色才会跟contentColor一致.
-    SPProgressHUD *hud = [SPProgressHUD showWithImage:[image imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate] message:@"建议使用指纹支付"];
+    SPProgressHUD *hud = [SPProgressHUD showWithImage:[image imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate] message:@"建议使用指纹支付" offset:CGPointZero toView:self.view];
     hud.spacing = 10;
-    [SPProgressHUD hideAfterDelay:2.0];
+    [SPProgressHUD hideForView:self.view afterDelay:2.0f];
 }
 
 // 显示环状进度条(默认)
 - (void)annularProgressBarExample {
-    SPProgressHUD *hud = [SPProgressHUD showProgressWithMessage:@"" toView:nil];
+    SPProgressHUD *hud = [SPProgressHUD showProgressWithMessage:@"" toView:self.view];
     hud.progressViewStyle = SPProgressHUDProgressViewStyleAnnular;
     [self simulateProgressHaveText:YES];
 }
 
 // 显示饼状进度条
 - (void)pieProgressBarExample {
-    SPProgressHUD *hud = [SPProgressHUD showProgressWithMessage:@"" toView:nil];
+    SPProgressHUD *hud = [SPProgressHUD showProgressWithMessage:@"" toView:self.view];
     hud.progressViewStyle = SPProgressHUDProgressViewStylePie;
     [self simulateProgressHaveText:NO];
     
@@ -173,7 +174,7 @@ static NSString * SPExampleCellID     = @"SPExampleCellID";
 
 // 显示环状进度条(内切)
 - (void)innerRingProgressBarExample {
-    SPProgressHUD *hud = [SPProgressHUD showProgressWithMessage:@"" toView:nil];
+    SPProgressHUD *hud = [SPProgressHUD showProgressWithMessage:@"" toView:self.view];
     hud.progressViewStyle = SPProgressHUDProgressViewStyleInnerRing;
     [self simulateProgressHaveText:NO];
 }
@@ -181,7 +182,7 @@ static NSString * SPExampleCellID     = @"SPExampleCellID";
 // 显示柱状进度条
 - (void)barProgressBarExample {
 
-    SPProgressHUD *hud = [SPProgressHUD showProgressWithMessage:@"正在上传..." toView:nil];
+    SPProgressHUD *hud = [SPProgressHUD showProgressWithMessage:@"正在上传..." toView:self.view];
     hud.progressViewStyle = SPProgressHUDProgressViewStyleBar;
     hud.defaultMotionEffectsEnabled = NO; // 去除视觉差效果
     hud.messageLabel.font = [UIFont systemFontOfSize:14];
@@ -190,7 +191,7 @@ static NSString * SPExampleCellID     = @"SPExampleCellID";
 
 // 模拟进度
 - (void)simulateProgressHaveText:(BOOL)haveText {
-    SPProgressHUD *hud = [SPProgressHUD HUDForView:nil];
+    SPProgressHUD *hud = [SPProgressHUD HUDForView:self.view];
     // 模拟progress进度（耗时操作,放到异步线程中,否则HUD弹不出来,注意必须回到主线程渲染UI）
     dispatch_async(dispatch_get_global_queue(QOS_CLASS_USER_INITIATED, 0), ^{
         __block float progress = 0.0f;
@@ -219,7 +220,7 @@ static NSString * SPExampleCellID     = @"SPExampleCellID";
     animationView.strokeColor = [UIColor blackColor];
     animationView.strokeStart = 0.2;
     
-    SPProgressHUD *hud = [SPProgressHUD showActivityWithMessage:@""];
+    SPProgressHUD *hud = [SPProgressHUD showActivityWithMessage:@"" toView:self.view];
     hud.customView = animationView;
     hud.color = [UIColor whiteColor];
     hud.maskColor = [[UIColor blackColor] colorWithAlphaComponent:0.4];
@@ -237,7 +238,7 @@ static NSString * SPExampleCellID     = @"SPExampleCellID";
 - (void)customizeImageExample {
     UIImageView *imageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"toast"]];
     
-    SPProgressHUD *hud = [SPProgressHUD showActivityWithMessage:@""];
+    SPProgressHUD *hud = [SPProgressHUD showWithImage:nil message:nil offset:CGPointZero toView:SPProgressHUD.defaultWindow];
     hud.customView = imageView;
     hud.color = [UIColor whiteColor];
     hud.maskColor = [[UIColor blackColor] colorWithAlphaComponent:0.4];
