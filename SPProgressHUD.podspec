@@ -9,7 +9,7 @@ Pod::Spec.new do |spec|
   # spec.screenshots  = "www.example.com/screenshots_1.gif", "www.example.com/screenshots_2.gif"
 
   spec.license      = "MIT"
-  s.license      = { :type => "MIT", :file => "LICENSE" }
+  spec.license      = { :type => "MIT", :file => "LICENSE" }
 
 
   spec.author             = { "乐升平" => "lesp163@163.com" }
