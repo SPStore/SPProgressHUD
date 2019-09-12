@@ -25,3 +25,14 @@ target 'MyApp' do
 end
 ```
 ## 使用示例
+```
+    [SPProgressHUD showActivityWithMessage:@"正在加载..." toView:self.view];
+    __weak typeof(self) weakSelf = self;
+    // 模拟网络请求
+    dispatch_async(dispatch_get_global_queue(QOS_CLASS_USER_INITIATED, 0), ^{
+        sleep(1.2);
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [SPProgressHUD hideForView:weakSelf.view]; // 如果显示的时候指定了父视图，隐藏时也必须指定且跟显示时一致.
+        });
+    });
+```
