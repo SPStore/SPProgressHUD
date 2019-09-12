@@ -40,65 +40,65 @@ end
 
 ## 显示HUD
 显示指示器,默认为UIActivityIndicatorView
-```
+```objective-c
 + (instancetype)showActivityToView:(UIView *)view;
 + (instancetype)showActivityWithMessage:(nullable NSString *)message toView:(UIView *)view;
 ```
 显示纯文本
-```
+```objective-c
 + (instancetype)showWithMessage:(nullable NSString *)message toView:(UIView *)view;
 + (instancetype)showWithMessage:(nullable NSString *)message
                          offset:(CGPoint)offset
                          toView:(UIView *)view;
 ```
 显示成功
-```
+```objective-c
 + (instancetype)showSuccessWithMessage:(nullable NSString *)message toView:(UIView *)view;
 ```
 显示失败
-```
+```objective-c
 + (instancetype)showErrorWithMessage:(nullable NSString *)message toView:(UIView *)view;
 ```
 显示详情
-```
+```objective-c
 + (instancetype)showInfoWithMessage:(nullable NSString *)message toView:(UIView *)view;
 ```
 显示自定义图片+文本
-```
+```objective-c
 + (instancetype)showWithImage:(nullable UIImage *)image
                       message:(nullable NSString *)message
                        offset:(CGPoint)offset
                        toView:(UIView *)view;
 ```
 显示进度条
-```
+```objective-c
 + (instancetype)showProgressToView:(UIView *)view;
 + (instancetype)showProgressWithMessage:(nullable NSString *)message toView:(UIView *)view;
 ```
 ## 隐藏HUD (如果视图上只有一个HUD，类方法隐藏和实例方法隐藏等效)
 类方法隐藏父视图上最顶层的HUD.
-```
+```objective-c
 + (BOOL)hideForView:(UIView *)view;
 + (BOOL)hideForView:(UIView *)view afterDelay:(NSTimeInterval)delay;
 ```
 实例方法隐藏的是指定的HUD.
-```
+```objective-c
 - (void)hide;
 - (void)hideAfterDelay:(NSTimeInterval)delay;
 - (void)hideAfterDelay:(NSTimeInterval)delay completion:(nullable SPProgressHUDHideCompletion)completion;
 ```
 隐藏所有HUD.
-```
+```objective-c
 + (NSUInteger)hideAllHUDsForView:(UIView *)view;
 ```
 ## 查找
 查找HUD
-```
+```objective-c
 + (nullable SPProgressHUD *)HUDForView:(UIView *)view; // 查找视图上最顶层的HUD.
 + (NSArray *)allHUDsForView:(UIView *)view; // 查找视图上所有的HUD.
 ```
 获取window，当你想要让HUD显示在window上的时候，可以调用此方法，如:[SPProgressHUD showActivityToView:SPProgressHUD.defaultWindow]
-```
+```objective-c
 + (nullable UIWindow *)defaultWindow;
 ```
 ## 设置
