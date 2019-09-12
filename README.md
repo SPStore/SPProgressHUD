@@ -1,7 +1,7 @@
 # SPProgressHUD
 这是一款拥有指示器加载、toast、进度条等功能的组件.
 
-[![](https://raw.githubusercontent.com/wiki/SPStore/SPProgressHUD/Screetshots/1-small.png)](https://raw.githubusercontent.com/wiki/SPStore/SPProgressHUD/Screetshots/1.png)
+[![](https://raw.githubusercontent.com/wiki/乐升平/SPProgressHUD/Screetshots/1-small.png)](https://raw.githubusercontent.com/wiki/乐升平/SPProgressHUD/Screetshots/1.png)
 [![](https://raw.githubusercontent.com/wiki/SPStore/SPProgressHUD/Screetshots/2-small.png)](https://raw.githubusercontent.com/wiki/SPStore/SPProgressHUD/Screetshots/2.png)
 [![](https://raw.githubusercontent.com/wiki/SPStore/SPProgressHUD/Screetshots/3-small.png)](https://raw.githubusercontent.com/wiki/SPStore/SPProgressHUD/Screetshots/3.png)
 [![](https://raw.githubusercontent.com/wiki/SPStore/SPProgressHUD/Screetshots/4-small.png)](https://raw.githubusercontent.com/wiki/SPStore/SPProgressHUD/Screetshots/4.png)
