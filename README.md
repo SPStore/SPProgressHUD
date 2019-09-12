@@ -152,14 +152,14 @@ end
 ```
 
 ## FAQ
-Q1、当HUD显示的时候，如何跟界面进行交互?<br>
-A1、你可以关闭HUD的交互，如 `hud.userInteractionEnabled = NO`<br><br>
+**Q1、当HUD显示的时候，如何跟界面进行交互?**<br>
+**A1、你可以关闭HUD的交互，如 `hud.userInteractionEnabled = NO`**<br><br>
 
-Q2、如何快速的让HUD显示在window上?<br>
-A2、你可以使用SPProgressHUD提供的默认window，如 `[SPProgressHUD showActivityToView:SPProgressHUD.defaultWindow]`<br><br>
+**Q2、如何快速的让HUD显示在window上?**<br>
+**A2、你可以使用SPProgressHUD提供的默认window，如 `[SPProgressHUD showActivityToView:SPProgressHUD.defaultWindow]`**<br><br>
 
-Q3、如何全局定制HUD的样式?<br>
-A3、你可以通过appearance方法对HUD全局定制，如:
+**Q3、如何全局定制HUD的样式?**<br>
+**A3、你可以通过appearance方法对HUD全局定制，如:**
 ```objective-c
 [SPProgressHUD appearance].contentColor = [UIColor blackColor];
 [SPProgressHUD appearance].color = [[UIColor whiteColor] colorWithAlphaComponent:0.75];
