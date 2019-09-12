@@ -36,3 +36,182 @@ end
         });
     });
 ```
+更多示例，可查看工程中的Demo
+
+## 显示HUD
+显示指示器,默认为UIActivityIndicatorView
+```
++ (instancetype)showActivityToView:(UIView *)view;
++ (instancetype)showActivityWithMessage:(nullable NSString *)message toView:(UIView *)view;
+```
+显示纯文本
+```
++ (instancetype)showWithMessage:(nullable NSString *)message toView:(UIView *)view;
++ (instancetype)showWithMessage:(nullable NSString *)message
+                         offset:(CGPoint)offset
+                         toView:(UIView *)view;
+```
+显示成功
+```
++ (instancetype)showSuccessWithMessage:(nullable NSString *)message toView:(UIView *)view;
+```
+显示失败
+```
++ (instancetype)showErrorWithMessage:(nullable NSString *)message toView:(UIView *)view;
+```
+显示详情
+```
++ (instancetype)showInfoWithMessage:(nullable NSString *)message toView:(UIView *)view;
+```
+显示自定义图片+文本
+```
++ (instancetype)showWithImage:(nullable UIImage *)image
+                      message:(nullable NSString *)message
+                       offset:(CGPoint)offset
+                       toView:(UIView *)view;
+```
+显示进度条
+```
++ (instancetype)showProgressToView:(UIView *)view;
++ (instancetype)showProgressWithMessage:(nullable NSString *)message toView:(UIView *)view;
+```
+## 隐藏HUD (如果视图上只有一个HUD，类方法隐藏和实例方法隐藏等效)
+类方法隐藏父视图上最顶层的HUD.
+```
++ (BOOL)hideForView:(UIView *)view;
++ (BOOL)hideForView:(UIView *)view afterDelay:(NSTimeInterval)delay;
+```
+实例方法隐藏的是指定的HUD.
+```
+- (void)hide;
+- (void)hideAfterDelay:(NSTimeInterval)delay;
+- (void)hideAfterDelay:(NSTimeInterval)delay completion:(nullable SPProgressHUDHideCompletion)completion;
+```
+隐藏所有HUD.
+```
++ (NSUInteger)hideAllHUDsForView:(UIView *)view;
+```
+## 查找
+查找HUD
+```
++ (nullable SPProgressHUD *)HUDForView:(UIView *)view; // 查找视图上最顶层的HUD.
++ (NSArray *)allHUDsForView:(UIView *)view; // 查找视图上所有的HUD.
+```
+获取window，当你想要让HUD显示在window上的时候，可以调用此方法，如:[SPProgressHUD showActivityToView:SPProgressHUD.defaultWindow]
+```
++ (nullable UIWindow *)defaultWindow;
+```
+## 设置
+```
+/**
+ * 自定义view.
+ 
+ * 如果customView的translatesAutoresizingMaskIntoConstraints为NO,
+ * 需要保证customView的intrinsicContentSize有值,HUD会根据intrinsicContentSize自动适应其大小.
+ 
+ * 如果customView的translatesAutoresizingMaskIntoConstraints为YES:
+ 
+   1.自动布局:如果customView大小能被子控件撑起,那么不需要再给customView设置size,
+      HUD会自动获取customView被子控件撑起的大小(记为fittingSize),
+      如果又手动设置了siz(记为settingSize),HUD会取fittingSize和settingSize中较大的那一个.
+ 
+   2.非自动布局:如果customView本身就有intrinsicContentSize
+     (如`[[UIImageView alloc] initWithImage:[UIImage imageNamed:@"xxx"]]`),
+      那么可以不用手动设置size,HUD会根据intrinsicContentSize适应其大小;
+      否则需要给customView手动设置一个size
+ */
+@property (nonatomic, strong) UIView *customView;
+
+/**
+ 展示文本消息的Label.
+ */
+@property (nonatomic, strong, readonly) UILabel *messageLabel;
+
+/**
+ messageLabel的位置,默认在下.
+ */
+@property (nonatomic, assign) SPProgressHUDLabelPosition labelPosition UI_APPEARANCE_SELECTOR;
+
+/**
+ 进度值(0.0 to 1.0).
+ */
+@property (nonatomic, assign) float progress;
+
+/**
+ 进度条样式.
+ */
+@property (nonatomic, assign) SPProgressHUDProgressViewStyle progressViewStyle UI_APPEARANCE_SELECTOR;
+
+/**
+ 内容颜色,比如UILabel的textColor,自带UIActivityIndicatorView的color,UIImage的tintColor等. 默认[UIColor colorWithWhite:0.f alpha:0.7f].
+ */
+@property (nonatomic, strong, nullable) UIColor *contentColor UI_APPEARANCE_SELECTOR;
+
+/**
+ 是否支持模糊效果,默认YES.
+ */
+@property (nonatomic, assign) BOOL supportedBlur UI_APPEARANCE_SELECTOR;
+
+/**
+ 内容所在容器的背景色. 如果想要使用实体颜色,需要将supportedBlur置为NO.否则color会有模糊效果.
+ */
+@property (nonatomic, strong, nullable) UIColor *color UI_APPEARANCE_SELECTOR;
+
+/**
+ 圆角半径. 如果想要设置圆角半径为宽/高的一半,设置该值为足够大就可以.
+ */
+@property (nonatomic, assign) CGFloat cornerRadius UI_APPEARANCE_SELECTOR;
+
+/**
+ 蒙层背景颜色(如果直接设置HUD的backgroundColor没有alpha渐变动画).
+ */
+@property (nonatomic, strong, nullable) UIColor *maskColor UI_APPEARANCE_SELECTOR;
+
+/**
+ 内容的四周边距,同时也是HUD相对屏幕边缘的最小边距.
+ */
+@property (nonatomic, assign) CGFloat margin UI_APPEARANCE_SELECTOR;
+
+/**
+ * 相对中心点的偏移,默认CGPointZero(居中).你可以使用SPProgressMaxOffset
+ * 和 -SPProgressMaxOffset移动HUD到屏幕边缘.距离屏幕边缘的距离为margin.
+ * 例如,CGPointMake(0.f, SPProgressMaxOffset)处于距离屏幕底部为margin的位置.
+ */
+@property (nonatomic, assign) CGPoint offset UI_APPEARANCE_SELECTOR;
+
+/**
+ 子控件之间的间距.
+ */
+@property (nonatomic, assign) CGFloat spacing UI_APPEARANCE_SELECTOR;
+
+/**
+ 最小size.默认CGSizeZero. 如果设置了该值,则HUD的实际显示大小 >= minSize.
+ */
+@property (nonatomic, assign) CGSize minSize UI_APPEARANCE_SELECTOR;
+
+/**
+ 是否强制宽高相等.
+ */
+@property (nonatomic, assign, getter=isSquare) BOOL square UI_APPEARANCE_SELECTOR;
+
+/**
+ 隐藏时是否从父视图上移除,当采用类方法显示时,默认YES.
+ */
+@property (assign, nonatomic) BOOL removeFromSuperViewOnHide;
+
+/**
+ 是否拥有视觉差效果,默认YES.
+ */
+@property (assign, nonatomic, getter=areDefaultMotionEffectsEnabled) BOOL defaultMotionEffectsEnabled UI_APPEARANCE_SELECTOR;
+
+/**
+ 是否使用隐藏动画,默认YES.
+ */
+@property (nonatomic, assign, getter=isUseHideAnimation) BOOL useHideAnimation UI_APPEARANCE_SELECTOR;
+
+/**
+ 隐藏完成时的回调.隐藏动画执行完成才开始回调,如果想要隐藏时立即回调,可设置`useHideAnimation`为NO.
+ */
+@property (copy, nullable) SPProgressHUDHideCompletion hideCompletion;
+
+```
