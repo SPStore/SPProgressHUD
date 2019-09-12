@@ -126,7 +126,8 @@ static NSString * SPExampleCellID     = @"SPExampleCellID";
 
 // 显示失败
 - (void)failureExample {
-    [SPProgressHUD showErrorWithMessage:@"添加失败" toView:self.view];
+    [SPProgressHUD showErrorWithMessage:@"添加失败"
+toView:self.view];
     [SPProgressHUD hideForView:self.view afterDelay:1.2f];
 }
 
