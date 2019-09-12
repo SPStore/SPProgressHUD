@@ -1,4 +1,11 @@
 # SPProgressHUD
+[![Build Status](http://img.shields.io/travis/SPStore/SPProgressHUD.svg?style=flat)](https://travis-ci.org/SPStore/SPAlertController)
+[![Pod Version](http://img.shields.io/cocoapods/v/SPProgressHUD.svg?style=flat)](http://cocoadocs.org/docsets/SPAlertController/)
+[![Pod Platform](http://img.shields.io/cocoapods/p/SPProgressHUD.svg?style=flat)](http://cocoadocs.org/docsets/SPAlertController/)
+![Language](https://img.shields.io/badge/language-Object--C-ff69b4.svg)
+[![Pod License](http://img.shields.io/cocoapods/l/SPProgressHUD.svg?style=flat)](https://www.apache.org/licenses/LICENSE-2.0.html)
+[![Carthage compatible](https://img.shields.io/badge/Carthage-compatible-4BC51D.svg?style=flat)](https://github.com/SPStore/SPProgressHUD)
+
 这是一款拥有指示器加载、toast、进度条等功能的组件.
 
 [![](https://raw.githubusercontent.com/wiki/SPStore/SPProgressHUD/Screetshots/1-small.png)](https://raw.githubusercontent.com/wiki/SPStore/SPProgressHUD/Screetshots/1.png)
