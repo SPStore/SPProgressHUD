@@ -8,7 +8,7 @@
 
 #import "SPProgressHUD.h"
 
-#define SPMainThreadAssert() NSAssert([NSThread isMainThread], @"SPProgressHUD需要在主线程被访问.");
+CGFloat const SPProgressMaxOffset = 1000000.f;
 #define SPIndicatorTag 20180829
 
 @interface SPBezelView : UIView
@@ -56,17 +56,11 @@ UIImage *displayInfoImage(CGSize size, CGFloat inset);
 @implementation SPProgressHUD
 
 #pragma mark - Public
-
-+ (instancetype)showActivity {
-    return [self showActivityWithMessage:nil];
-}
-
-+ (instancetype)showActivityWithMessage:(NSString *)message {
-    return [self showActivityWithMessage:message toView:nil];
++ (instancetype)showActivityToView:(UIView *)view {
+    return [self showActivityWithMessage:nil toView:view];
 }
 
 + (instancetype)showActivityWithMessage:(NSString *)message toView:(UIView *)view {
-    if (view == nil)  view = [self frontWindow];
     SPProgressHUD *hud = [[self alloc] initWithView:view]; // 用self调用alloc,不要用SPProgressHUD调用alloc,self调用的好处是子类继承时,创建的是子类对象.
     hud.removeFromSuperViewOnHide = YES;
     if (![self isEmptyString:message]) { // 如果message不为空
@@ -78,55 +72,33 @@ UIImage *displayInfoImage(CGSize size, CGFloat inset);
     return hud;
 }
 
-+ (instancetype)showWithMessage:(NSString *)message {
-    return [self showWithMessage:message toView:nil];
-}
-
 + (instancetype)showWithMessage:(NSString *)message toView:(UIView *)view {
-    UIImage *image = nil; // 因为下面这个方法image参数默认不要为空,如果直接传nil会报警告
-    return [self showWithImage:image message:message toView:view];
+    return [self showWithMessage:message offset:CGPointZero toView:view];
 }
 
-+ (instancetype)showSuccessWithMessage:(NSString *)message {
-    return [self showSuccessWithMessage:message toView:nil];
++ (instancetype)showWithMessage:(NSString *)message offset:(CGPoint)offset toView:(UIView *)view {
+    return [self showWithImage:nil message:message offset:offset toView:view];
 }
+
 
 + (instancetype)showSuccessWithMessage:(NSString *)message toView:(UIView *)view {
     UIImage *successImage = displaySuccessImage(CGSizeMake(28, 28),0);
-    
-    return [self showWithImage:[successImage imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate] message:message toView:view];
-}
-
-+ (instancetype)showErrorWithMessage:(NSString *)message {
-    return [self showErrorWithMessage:message toView:nil];
+    return [self showWithImage:[successImage imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate] message:message offset:CGPointZero toView:view];
 }
 
 + (instancetype)showErrorWithMessage:(NSString *)message toView:(UIView *)view {
     UIImage *errorImage = displayErrorImage(CGSizeMake(28, 28),2);
-
-    return [self showWithImage:[errorImage imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate] message:message toView:view];
-}
-
-+ (instancetype)showInfoWithMessage:(NSString *)message {
-    return [self showInfoWithMessage:message toView:nil];
+    return [self showWithImage:[errorImage imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate] message:message offset:CGPointZero toView:view];
 }
 
 + (instancetype)showInfoWithMessage:(NSString *)message toView:(UIView *)view {
     UIImage *infoImage = displayInfoImage(CGSizeMake(28, 28), 2);
-
-    return [self showWithImage:[infoImage imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate] message:message toView:view];
+    return [self showWithImage:[infoImage imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate] message:message offset:CGPointZero toView:view];
 }
 
-+ (instancetype)showWithImage:(UIImage *)image message:(NSString *)message {
-    return [self showWithImage:image message:message toView:nil];
-}
-
-+ (instancetype)showWithImage:(UIImage *)image
-                      message:(NSString *)message
-                       toView:(UIView *)view {
-    
-    if (view == nil)  view = [self frontWindow];
++ (instancetype)showWithImage:(UIImage *)image message:(NSString *)message offset:(CGPoint)offset toView:(UIView *)view {
     SPProgressHUD *hud = [[self alloc] initWithView:view];
+    hud.offset = offset;
     hud.removeFromSuperViewOnHide = YES;
     if (image) {
         UIImageView *imageView = [[UIImageView alloc] initWithImage:image];
@@ -147,15 +119,12 @@ UIImage *displayInfoImage(CGSize size, CGFloat inset);
     return hud;
 }
 
-+ (instancetype)showProgress {
-    return [self showProgressWithMessage:nil toView:nil];
-}
-
-+ (instancetype)showProgressWithMessage:(NSString *)message {
-    return [self showProgressWithMessage:message toView:nil];
++ (instancetype)showProgressToView:(UIView *)view {
+    return [self showProgressWithMessage:nil toView:view];
 }
 
 + (instancetype)showProgressWithMessage:(NSString *)message toView:(UIView *)view {
+    
     SPProgressHUD *hud = [[self alloc] initWithView:view];
     hud.removeFromSuperViewOnHide = YES;
     SPHUDRoundProgressView *progressView = [[SPHUDRoundProgressView alloc] init];
@@ -172,6 +141,11 @@ UIImage *displayInfoImage(CGSize size, CGFloat inset);
 }
 
 - (void)show {
+    if (![NSThread isMainThread]) {
+#ifdef DEBUG
+        NSLog(@"Warning:SPProgressHUD needs to be showed on the main thread.");
+#endif
+    }
     [self.bezelView.layer removeAllAnimations];
     [self.backgroundView.layer removeAllAnimations];
     
@@ -181,14 +155,6 @@ UIImage *displayInfoImage(CGSize size, CGFloat inset);
     self.alpha = 1.f;
     
     [self animateIn:YES completion:NULL];
-}
-
-+ (BOOL)hide {
-    return [self hideForView:nil afterDelay:0.0];
-}
-
-+ (BOOL)hideAfterDelay:(NSTimeInterval)delay {
-    return [self hideForView:nil afterDelay:delay];
 }
 
 + (BOOL)hideForView:(UIView *)view {
@@ -201,6 +167,9 @@ UIImage *displayInfoImage(CGSize size, CGFloat inset);
         [hud hideAfterDelay:delay completion:nil];
         return YES;
     }
+#ifdef DEBUG
+    NSLog(@"Error:No HUD was found on the %@(%p). Check whether hiding is consistent with showing the specified view.",[view class],view);
+#endif
     return NO;
 }
 
@@ -230,9 +199,11 @@ UIImage *displayInfoImage(CGSize size, CGFloat inset);
 }
 
 - (void)hide {
-    // 需要在主线程
-    SPMainThreadAssert()
-    
+    if (![NSThread isMainThread]) {
+#ifdef DEBUG
+        NSLog(@"Warning:SPProgressHUD needs to be hidden on the main thread.");
+#endif
+    }
     if (self.hasFinished == YES) return; // 防止多次隐藏多次回调hideSuccessHandle
     
     self.finished = YES;
@@ -251,9 +222,6 @@ UIImage *displayInfoImage(CGSize size, CGFloat inset);
 }
 
 + (SPProgressHUD *)HUDForView:(UIView *)view {
-    if (view == nil) {
-        view = [self frontWindow];
-    }
     // 逆序枚举
     NSEnumerator *subviewsEnum = [view.subviews reverseObjectEnumerator];
     for (UIView *subview in subviewsEnum) {
@@ -261,16 +229,10 @@ UIImage *displayInfoImage(CGSize size, CGFloat inset);
             return (SPProgressHUD *)subview;
         }
     }
-#ifdef DEBUG
-    NSLog(@"Warning:隐藏失败:在'%@(%p)'上没有找到任何HUD,请检查隐藏时与显示时所指定的父视图是否一致.",[view class],view);
-#endif
     return nil;
 }
 
 + (NSArray *)allHUDsForView:(UIView *)view {
-    if (view == nil) {
-        view = [self frontWindow];
-    }
     NSMutableArray *huds = [NSMutableArray array];
     NSArray *subviews = view.subviews;
     for (UIView *aView in subviews) {
@@ -329,7 +291,7 @@ UIImage *displayInfoImage(CGSize size, CGFloat inset);
     return NO;
 }
 
-+ (UIWindow *)frontWindow {
++ (UIWindow *)defaultWindow {
     NSEnumerator *frontToBackWindows = [UIApplication.sharedApplication.windows reverseObjectEnumerator];
     for (UIWindow *window in frontToBackWindows) {
         BOOL windowOnMainScreen = window.screen == UIScreen.mainScreen;
@@ -357,7 +319,11 @@ UIImage *displayInfoImage(CGSize size, CGFloat inset);
 #pragma mark - Init
 
 - (instancetype)initWithView:(UIView *)view {
-    NSAssert(view, @"View must not be nil.");
+#ifdef DEBUG
+    if (view == nil) {
+        NSLog(@"Warning:View must not be nil.");
+    }
+#endif
     // 给self(self就是hud)设置尺寸
     return [self initWithFrame:view.bounds];
 }

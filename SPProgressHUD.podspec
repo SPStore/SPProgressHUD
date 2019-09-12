@@ -1,8 +1,8 @@
 Pod::Spec.new do |spec|
 
   spec.name         = "SPProgressHUD"
-  spec.version      = "1.0.0"
-  spec.summary      = "指示器+toast功能"
+  spec.version      = "0.0.1"
+  spec.summary      = "展示一个简单的显示器窗口,包含了指示器,可选的文本消息,进度条,成功、失败等图片."
 
 
   spec.homepage     = "https://github.com/SPStore/SPProgressHUD"
