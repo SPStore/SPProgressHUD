@@ -102,7 +102,7 @@ end
 + (nullable UIWindow *)defaultWindow;
 ```
 ## 设置
-```
+```objective-c
 /**
  * 自定义view.
  
