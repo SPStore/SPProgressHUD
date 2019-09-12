@@ -123,24 +123,31 @@ end
 @property (nonatomic, strong) UIView *customView;
 ```
 ```objective-c
-@property (nonatomic, strong, readonly) UILabel *messageLabel; // 展示文本消息的Label.
-@property (nonatomic, assign) SPProgressHUDLabelPosition labelPosition UI_APPEARANCE_SELECTOR; // messageLabel的位置,默认在下.
+@property (nonatomic, strong, readonly) UILabel *messageLabel;                                         // 展示文本消息的Label.
+@property (nonatomic, assign) SPProgressHUDLabelPosition labelPosition UI_APPEARANCE_SELECTOR;         // messageLabel的位置,默认在下.
 @property (nonatomic, assign) float progress; // 进度值(0.0 to 1.0).
 @property (nonatomic, assign) SPProgressHUDProgressViewStyle progressViewStyle UI_APPEARANCE_SELECTOR; // 进度条样式.
-@property (nonatomic, strong, nullable) UIColor *contentColor UI_APPEARANCE_SELECTOR; // 内容颜色,比如UILabel的textColor,自带UIActivityIndicatorView的color,UIImage的tintColor等. 默认[UIColor colorWithWhite:0.f alpha:0.7f].
-@property (nonatomic, assign) BOOL supportedBlur UI_APPEARANCE_SELECTOR; // 是否支持模糊效果,默认YES.
-@property (nonatomic, strong, nullable) UIColor *color UI_APPEARANCE_SELECTOR; // 内容所在容器的背景色. 如果想要使用实体颜色,需要将supportedBlur置为NO.否则color会有模糊效果.
-@property (nonatomic, assign) CGFloat cornerRadius UI_APPEARANCE_SELECTOR; // 圆角半径. 如果想要设置圆角半径为宽/高的一半,设置该值为足够大就可以.
-@property (nonatomic, strong, nullable) UIColor *maskColor UI_APPEARANCE_SELECTOR; // 蒙层背景颜色(如果直接设置HUD的backgroundColor没有alpha渐变动画).
-@property (nonatomic, assign) CGFloat margin UI_APPEARANCE_SELECTOR; // 内容的四周边距,同时也是HUD相对屏幕边缘的最小边距.
-@property (nonatomic, assign) CGPoint offset UI_APPEARANCE_SELECTOR; // 相对中心点的偏移,默认CGPointZero(居中).你可以使用SPProgressMaxOffset和 -SPProgressMaxOffset移动HUD到屏幕边缘.距离屏幕边缘的距离为margin.例如,CGPointMake(0.f, SPProgressMaxOffset)处于距离屏幕底部为margin的位置.
-@property (nonatomic, assign) CGFloat spacing UI_APPEARANCE_SELECTOR; // 子控件之间的间距.
-@property (nonatomic, assign) CGSize minSize UI_APPEARANCE_SELECTOR; // 最小size.默认CGSizeZero. 如果设置了该值,则HUD的实际显示大小 >= minSize.
-@property (nonatomic, assign, getter=isSquare) BOOL square UI_APPEARANCE_SELECTOR; // 是否强制宽高相等.
-@property (assign, nonatomic) BOOL removeFromSuperViewOnHide;// 隐藏时是否从父视图上移除,当采用类方法显示时,默认YES.
-@property (nonatomic, assign) CGPoint offset UI_APPEARANCE_SELECTOR; // 
+@property (nonatomic, strong, nullable) UIColor *contentColor UI_APPEARANCE_SELECTOR;                  // 内容颜色,比如UILabel的textColor,自带UIActivityIndicatorView的color,UIImage的tintColor等. 默认[UIColor colorWithWhite:0.f alpha:0.7f].
+@property (nonatomic, assign) BOOL supportedBlur UI_APPEARANCE_SELECTOR;                               // 是否支持模糊效果,默认YES.
+@property (nonatomic, strong, nullable) UIColor *color UI_APPEARANCE_SELECTOR;                         // 内容所在容器的背景色. 如果想要使用实体颜色,需要将supportedBlur置为NO.否则color会有模糊效果.
+@property (nonatomic, assign) CGFloat cornerRadius UI_APPEARANCE_SELECTOR;                             // 圆角半径. 如果想要设置圆角半径为宽/高的一半,设置该值为足够大就可以.
+@property (nonatomic, strong, nullable) UIColor *maskColor UI_APPEARANCE_SELECTOR;                     // 蒙层背景颜色(如果直接设置HUD的backgroundColor没有alpha渐变动画).
+@property (nonatomic, assign) CGFloat margin UI_APPEARANCE_SELECTOR;                                   // 内容的四周边距,同时也是HUD相对屏幕边缘的最小边距.
+@property (nonatomic, assign) CGPoint offset UI_APPEARANCE_SELECTOR;                                   // 相对中心点的偏移,默认CGPointZero(居中).你可以使用SPProgressMaxOffset和 -SPProgressMaxOffset移动HUD到屏幕边缘.距离屏幕边缘的距离为margin.例如,CGPointMake(0.f, SPProgressMaxOffset)处于距离屏幕底部为margin的位置.
+@property (nonatomic, assign) CGFloat spacing UI_APPEARANCE_SELECTOR;                                  // 子控件之间的间距.
+@property (nonatomic, assign) CGSize minSize UI_APPEARANCE_SELECTOR;                                   // 最小size.默认CGSizeZero. 如果设置了该值,则HUD的实际显示大小 >= minSize.
+@property (nonatomic, assign, getter=isSquare) BOOL square UI_APPEARANCE_SELECTOR;                     // 是否强制宽高相等.
+@property (assign, nonatomic) BOOL removeFromSuperViewOnHide;                                          // 隐藏时是否从父视图上移除,当采用类方法显示时,默认YES.
 @property (assign, nonatomic, getter=areDefaultMotionEffectsEnabled) BOOL defaultMotionEffectsEnabled UI_APPEARANCE_SELECTOR;// 是否拥有视觉差效果,默认YES.
 @property (nonatomic, assign, getter=isUseHideAnimation) BOOL useHideAnimation UI_APPEARANCE_SELECTOR; // 是否使用隐藏动画,默认YES.
-@property (copy, nullable) SPProgressHUDHideCompletion hideCompletion; // 隐藏完成时的回调.隐藏动画执行完成才开始回调,如果想要隐藏时立即回调,可设置`useHideAnimation`为NO.
+@property (copy, nullable) SPProgressHUDHideCompletion hideCompletion;                                 // 隐藏完成时的回调.隐藏动画执行完成才开始回调,如果想要隐藏时立即回调,可设置`useHideAnimation`为NO.
 
 ```
+
+## FAQ
+Q1、当HUD显示的时候，如何跟界面进行交互?
+A1、你可以关闭HUD的交互，如 `hud.userInteractionEnabled = NO`
+
+Q2、如何快速的让HUD显示在window上?
+A2、你可以使用SPProgressHUD提供的默认window，如 `[SPProgressHUD showActivityToView:SPProgressHUD.defaultWindow]`
+
