@@ -82,6 +82,11 @@ end
 + (instancetype)showProgressToView:(UIView *)view;
 + (instancetype)showProgressWithMessage:(nullable NSString *)message toView:(UIView *)view;
 ```
+实例方法显示HUD，如果上一次使用类方法显示后再隐藏，想要通过该方法恢复显示，需要将removeFromSuperViewOnHide属性设置为NO；恢复显示的样式和上一次的样式一致. 如果上一次只是创建了一个HUD实例，调用此方法的显示效果只会有一个指示器.
+
+```
+- (void)show;
+```
 ## 隐藏HUD (如果视图上只有一个HUD，类方法隐藏和实例方法隐藏等效)
 类方法隐藏父视图上最顶层的HUD.
 ```objective-c
