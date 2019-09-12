@@ -1,9 +1,9 @@
 # SPProgressHUD
 这是一款拥有指示器加载、toast、进度条等功能的组件.
 
-[![](https://raw.githubusercontent.com/wiki/leshengping/SPProgressHUD/Screetshots/1-small.png)](https://raw.githubusercontent.com/wiki/leshengping/SPProgressHUD/Screetshots/1.png)
-[![](https://raw.githubusercontent.com/wiki/leshengping/SPProgressHUD/Screetshots/2-small.png)](https://raw.githubusercontent.com/wiki/leshengping/SPProgressHUD/Screetshots/2.png)
-[![](https://raw.githubusercontent.com/wiki/乐升平/SPProgressHUD/Screetshots/3-small.png)](https://raw.githubusercontent.com/wiki/乐升平/SPProgressHUD/Screetshots/3.png)
+[![](https://raw.githubusercontent.com/wiki/乐升平/SPProgressHUD/Screenshots/1-small.png)](https://raw.githubusercontent.com/wiki/乐升平/SPProgressHUD/Screetshots/1.png)
+[![](https://raw.githubusercontent.com/wiki/乐升平/SPProgressHUD/Screetshots/2-small.png)](https://raw.githubusercontent.com/wiki/乐升平/SPProgressHUD/Screetshots/2.png)
+[![]()](https://raw.githubusercontent.com/wiki/乐升平/SPProgressHUD/Screetshots/3.png)
 [![](https://raw.githubusercontent.com/wiki/乐升平/SPProgressHUD/Screetshots/4-small.png)](https://raw.githubusercontent.com/wiki/乐升平/SPProgressHUD/Screetshots/4.png)
 [![](https://raw.githubusercontent.com/wiki/乐升平/SPProgressHUD/Screetshots/5-small.png)](https://raw.githubusercontent.com/wiki/乐升平/SPProgressHUD/Screetshots/5.png)
 [![](https://raw.githubusercontent.com/wiki/乐升平/SPProgressHUD/Screetshots/6-small.png)](https://raw.githubusercontent.com/wiki/乐升平/SPProgressHUD/Screetshots/6.png)
@@ -11,7 +11,7 @@
 [![](https://raw.githubusercontent.com/wiki/乐升平/SPProgressHUD/Screetshots/8-small.png)](https://raw.githubusercontent.com/wiki/乐升平/SPProgressHUD/Screetshots/8.png)
 [![](https://raw.githubusercontent.com/wiki/乐升平/SPProgressHUD/Screetshots/9-small.png)](https://raw.githubusercontent.com/wiki/乐升平/SPProgressHUD/Screetshots/9.png)
 [![](https://raw.githubusercontent.com/wiki/乐升平/SPProgressHUD/Screetshots/10-small.png)](https://raw.githubusercontent.com/wiki/乐升平/SPProgressHUD/Screetshots/10.png)
-[![](https://raw.githubusercontent.com/wiki/乐升平/SPProgressHUD/Screetshots/11-small.png)](https://raw.githubusercontent.com/wiki/乐升平/SPProgressHUD/Screetshots/11.png)
+[![](https://raw.githubusercontent.com/wiki/乐升平/SPProgressHUD/Screetshots/11-small.png)](https://raw.githubusercontent.com/wiki/乐升平/https://raw.githubusercontent.com/wiki/乐升平/SPProgressHUD/Screetshots/3-small.pngSPProgressHUD/Screetshots/11.png)
 [![](https://raw.githubusercontent.com/wiki/乐升平/SPProgressHUD/Screetshots/12-small.png)](https://raw.githubusercontent.com/wiki/乐升平/SPProgressHUD/Screetshots/12.png)
 [![](https://raw.githubusercontent.com/wiki/乐升平/SPProgressHUD/Screetshots/13-small.png)](https://raw.githubusercontent.com/wiki/乐升平/SPProgressHUD/Screetshots/13.png)
 [![](https://raw.githubusercontent.com/wiki/乐升平/SPProgressHUD/Screetshots/14-small.png)](https://raw.githubusercontent.com/wiki/乐升平/SPProgressHUD/Screetshots/14.png)
