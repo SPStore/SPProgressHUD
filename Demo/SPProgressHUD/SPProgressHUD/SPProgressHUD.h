@@ -62,7 +62,7 @@ typedef void(^SPProgressHUDHideCompletion)(void);
  创建一个HUD,添加到view上,并在view的中心显示带文本的指示器(UIActivityIndicatorView).
 
  @param message 文本消息.
- @param view 父视图,你可以使用`defaultWindow`,例如:SPProgressHUD.defaultWindow.
+ @param view 父视图,如果想添加在window上,你可以使用`SPProgressHUD.defaultWindow`.
  @return SPProgressHUD对象.
  */
 + (instancetype)showActivityWithMessage:(nullable NSString *)message toView:(UIView *)view;
@@ -71,7 +71,7 @@ typedef void(^SPProgressHUDHideCompletion)(void);
  创建一个HUD,添加到view上,并在view的中心显示纯文本.
 
  @param message 文本消息.
- @param view 父视图.你可以使用`defaultWindow`,例如:SPProgressHUD.defaultWindow.
+ @param view 父视图,如果想添加在window上,你可以使用`SPProgressHUD.defaultWindow`.
  @return SPProgressHUD对象.
  */
 + (instancetype)showWithMessage:(nullable NSString *)message toView:(UIView *)view;
@@ -81,7 +81,7 @@ typedef void(^SPProgressHUDHideCompletion)(void);
 
  @param message 文本消息.
  @param offset 相对中心点的偏移,默认CGPointZero(居中).你可以使用SPProgressMaxOffset和 -SPProgressMaxOffset移动HUD到屏幕边缘.距离屏幕边缘的距离为margin.例如,CGPointMake(0.f, SPProgressMaxOffset)处于距离屏幕底部为margin的位置.
- @param view 父视图,你可以使用`defaultWindow`,例如:SPProgressHUD.defaultWindow.
+ @param view 父视图,如果想添加在window上,你可以使用`SPProgressHUD.defaultWindow`.
  @return SPProgressHUD对象.
  */
 + (instancetype)showWithMessage:(nullable NSString *)message
@@ -92,7 +92,7 @@ typedef void(^SPProgressHUDHideCompletion)(void);
  创建一个HUD,添加到view上,并在view的中心显示成功.
 
  @param message 文本消息.
- @param view 父视图,你可以使用`defaultWindow`,例如:SPProgressHUD.defaultWindow.
+ @param view 父视图,如果想添加在window上,你可以使用`SPProgressHUD.defaultWindow`.
  @return SPProgressHUD对象.
  */
 + (instancetype)showSuccessWithMessage:(nullable NSString *)message toView:(UIView *)view;
@@ -101,7 +101,7 @@ typedef void(^SPProgressHUDHideCompletion)(void);
  创建一个HUD,添加到view上,并在view的中心显示失败.
  
  @param message 文本消息.
- @param view 父视图,你可以使用`defaultWindow`,例如:SPProgressHUD.defaultWindow.
+ @param view 父视图,如果想添加在window上,你可以使用`SPProgressHUD.defaultWindow`.
  @return SPProgressHUD对象.
  */
 + (instancetype)showErrorWithMessage:(nullable NSString *)message toView:(UIView *)view;
@@ -110,7 +110,7 @@ typedef void(^SPProgressHUDHideCompletion)(void);
  创建一个HUD,添加到view上,并在view的中心显示详情.
  
  @param message 文本消息.
- @param view 父视图,你可以使用`defaultWindow`,例如:SPProgressHUD.defaultWindow.
+ @param view 父视图,如果想添加在window上,你可以使用`SPProgressHUD.defaultWindow`.
  @return SPProgressHUD对象.
  */
 + (instancetype)showInfoWithMessage:(nullable NSString *)message toView:(UIView *)view;
@@ -121,7 +121,7 @@ typedef void(^SPProgressHUDHideCompletion)(void);
  @param image 自定义图片.
  @param message 文本消息.
  @param offset 相对中心点的偏移,默认CGPointZero(居中).你可以使用SPProgressMaxOffset和 -SPProgressMaxOffset移动HUD到屏幕边缘.距离屏幕边缘的距离为margin.例如,CGPointMake(0.f, SPProgressMaxOffset)处于距离屏幕底部为margin的位置.
- @param view 父视图,你可以使用`defaultWindow`,例如:SPProgressHUD.defaultWindow.
+ @param view 父视图,如果想添加在window上,你可以使用`SPProgressHUD.defaultWindow`.
  @return SPProgressHUD对象.
  */
 + (instancetype)showWithImage:(nullable UIImage *)image
@@ -132,7 +132,7 @@ typedef void(^SPProgressHUDHideCompletion)(void);
 /**
  创建一个HUD,添加到view上,并在view的中心显示不带文本的进度条.
 
- @param view 父视图.
+ @param view 父视图,如果想添加在window上,你可以使用`SPProgressHUD.defaultWindow`.
  @return SPProgressHUD对象.
  */
 + (instancetype)showProgressToView:(UIView *)view;
@@ -141,7 +141,7 @@ typedef void(^SPProgressHUDHideCompletion)(void);
  创建一个HUD,添加到view上,并在view的中心显示带文本的进度条.
 
  @param message 文本消息.
- @param view 父视图.
+ @param view 父视图,如果想添加在window上,你可以使用`SPProgressHUD.defaultWindow`.
  @return SPProgressHUD对象.
  */
 + (instancetype)showProgressWithMessage:(nullable NSString *)message toView:(UIView *)view;
